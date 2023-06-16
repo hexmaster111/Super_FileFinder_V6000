@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="GDriveCrawlerV3/App.axaml" value="GDriveCrawlerV3/GDriveCrawlerV3.csproj" />
+        <entry key="GDriveCrawlerV3/Views/MainWindow.axaml" value="GDriveCrawlerV3/GDriveCrawlerV3.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
