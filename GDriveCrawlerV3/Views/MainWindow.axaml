@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GDriveCrawlerV3.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+        Width="600" Height="450"
+        x:Class="GDriveCrawlerV3.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="GDriveCrawlerV3">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" IsEnabled="{Binding IsUiEnabled}">
+        <Menu Grid.Row="0">
+            <MenuItem Header="Rescan Selected Drive" Command="{Binding ReScanDriveCommand}" />
+            <MenuItem Header="Open Selected File" Command="{Binding OpenSelectedFileCommand}" />
+            <MenuItem Header="Open Containing Folder" Command="{Binding OpenContainingFolderCommand}" />
+        </Menu>
+        <Viewbox Grid.Row="1" MaxHeight="50">
+            <TextBlock Text="{Binding AppName}" />
+        </Viewbox>
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
+            <ComboBox Grid.Column="0" MinWidth="100" Items="{Binding Drives}" SelectedItem="{Binding SelectedDrive}"
+                      IsEnabled="{Binding IsNotCrawling}" />
+            <TextBox Grid.Column="1" Text="{Binding SearchText}" />
+            <Button Grid.Column="2" MinWidth="150" HorizontalContentAlignment="Center"
+                    Command="{Binding SearchCommand}">
+                Search
+            </Button>
+        </Grid>
+
+
+        <ListBox Grid.Row="3" Items="{Binding FoundFiles}"
+                 SelectedItem="{Binding SelectedFile}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ProgressBar IsIndeterminate="{Binding IsCrawling}" Value="100" />
+        </Grid>
+    </Grid>
+</Window>
